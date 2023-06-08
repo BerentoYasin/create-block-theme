@@ -17,8 +17,10 @@ jobs:
                   node-version-file: '.nvmrc'
                   cache: npm
 
-            - name: Setup Composer
+            - name: Install dependencies
               uses: php-actions/composer@v6
+              with:
+                  args: --ignore-platform-reqs
 
             - name: Install Dependencies
               run: npm i
@@ -33,3 +35,31 @@ jobs:
             - name: Run CSS Lint
               if: success() || failure()
               run: npm run lint:css
+
+    Test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Setup Node
+              uses: actions/setup-node@v3
+              with:
+                  node-version-file: '.nvmrc'
+                  cache: npm
+
+            - name: Install dependencies
+              uses: php-actions/composer@v6
+              with:
+                  args: --ignore-platform-reqs
+
+            - name: Setup MySQL
+              if: success() || failure()
+              uses: shogo82148/actions-setup-mysql@v1
+              with:
+                  mysql-version: '8.0'
+            - name: Run tests
+              run: |
+                  mysql -uroot -h127.0.0.1 -e 'SELECT version()' \
+                  && ./bin/install-wp-tests.sh --recreate-db wordpress_test root '' > /dev/null \
+                  && npm run test:php
