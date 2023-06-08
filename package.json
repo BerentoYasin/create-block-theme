@@ -46,6 +46,7 @@
 		"lint:js:fix": "npm run lint:js -- --fix",
 		"lint:php": "composer run-script lint",
 		"lint:php:fix": "composer run-script format",
+		"test:php": "composer run-script test",
 		"packages-update": "wp-scripts packages-update",
 		"start": "wp-scripts start src/index.js src/plugin-sidebar.js src/wp-org-theme-directory.js",
 		"update-version": "node update-version-and-changelog.js",
