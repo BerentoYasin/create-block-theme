@@ -1,3 +1,4 @@
+![1665582488659](https://github.com/WordPress/create-block-theme/assets/103007382/fe125edc-b77e-480e-b818-bd915c20d708)
 # Create Block Theme
 
 Welcome to Create Block Theme - a WordPress plugin to create block themes from within the Site Editor.
